@@ -20,6 +20,7 @@ public class InscricaoService {
         // in.hash(calculateHash(in.password()));
         // in.password(null);
         return inscricaoRepository.save(new InscricaoModel(in)).to();
+        
     }
 
     public Inscricao read(@NonNull String id) {

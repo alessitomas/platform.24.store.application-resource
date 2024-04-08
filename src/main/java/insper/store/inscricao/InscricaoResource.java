@@ -44,6 +44,12 @@ public class InscricaoResource implements InscricaoController {
         );
     }
 
+
+    @GetMapping("/inscricoes/hello")
+    public String hello() {
+        return "Hello from inscrit!";
+    }
+
     @Override
     public ResponseEntity<InscricaoOut> create(InscricaoIn in) {
         // parser
