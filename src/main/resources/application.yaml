@@ -1,6 +1,6 @@
 spring:
   application:
-    name: store-account
+    name: store-inscricao
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/store}
     username: ${DATABASE_USERNAME:store}
@@ -8,16 +8,16 @@ spring:
     driver-class-name: org.postgresql.Driver
   flyway:
     baseline-on-migrate: true
-    schemas: account
+    schemas: inscricao
   jpa:
     properties:
       hibernate:
-        default_schema: account
+        default_schema: inscricao
 
 management:
   endpoints:
     web:
-      base-path: /accounts/actuator
+      base-path: /inscricoes/actuator
       exposure:
         include: [ 'prometheus' ]
 

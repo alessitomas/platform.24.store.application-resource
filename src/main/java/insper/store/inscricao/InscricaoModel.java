@@ -1,4 +1,4 @@
-package insper.store.candidatura;
+package insper.store.inscricao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,39 +15,40 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 @Entity
-@Table(name = "candidatura")
+@Table(name = "inscricao")
 @EqualsAndHashCode(of = "id")
 @Builder @Getter @Setter @Accessors(chain = true, fluent = true)
 @NoArgsConstructor @AllArgsConstructor
-public class CandidaturaModel {
+public class InscricaoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id_candidatura")
+    @Column(name = "id_inscricao")
     private String id;
 
-    @Column(name = "tx_name")
-    private String name;
+    @Column(name = "tx_id_user")
+    private String id_user;
 
-    @Column(name = "tx_email")
-    private String email;
+    @Column(name = "tx_id_job")
+    private String id_job;
 
-    @Column(name = "tx_hash")
-    private String hash;
+    @Column(name = "tx_status")
+    private String status;
+    
 
-    public CandidaturaModel(Candidatura o) {
+    public InscricaoModel(Inscricao o) {
         this.id = o.id();
-        this.name = o.name();
-        this.email = o.email();
-        this.hash = o.hash();
+        this.id_user = o.id_user();
+        this.id_job = o.id_job();
+        this.status = o.status();
     }
     
-    public Candidatura to() {
-        return Candidatura.builder()
+    public Inscricao to() {
+        return Inscricao.builder()
             .id(id)
-            .name(name)
-            .email(email)
-            .hash(hash)
+            .id_user(id_user)
+            .id_job(id_job)
+            .status(status)
             .build();
     }
     

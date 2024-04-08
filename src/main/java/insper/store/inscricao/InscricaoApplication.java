@@ -1,4 +1,4 @@
-package insper.store.candidatura;
+package insper.store.inscricao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
-public class CandidaturaApplication {
+public class InscricaoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CandidaturaApplication.class, args);
+        SpringApplication.run(InscricaoApplication.class, args);
     }
     
 }

@@ -1,4 +1,6 @@
-package insper.store.candidatura;
+package insper.store.inscricao;
+
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,12 +12,11 @@ import lombok.experimental.Accessors;
 @Builder
 @Getter @Setter @Accessors(fluent = true, chain = true)
 @AllArgsConstructor @NoArgsConstructor
-public class Candidatura {
+public class Inscricao {
 
     private String id;
-    private String name;
-    private String email;
-    private String password;
-    private String hash;
-    
+    private String id_user;
+    private String id_job;
+    private String status;
+
 }

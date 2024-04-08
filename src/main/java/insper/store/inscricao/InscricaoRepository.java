@@ -1,4 +1,4 @@
-package insper.store.candidatura;
+package insper.store.inscricao;
 
 
 
@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CandidaturaRepository extends CrudRepository<CandidaturaModel, String> {
+public interface InscricaoRepository extends CrudRepository<InscricaoModel, String> {
     
 }

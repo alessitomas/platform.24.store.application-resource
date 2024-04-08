@@ -1,4 +1,4 @@
-package insper.store.candidatura;
+package insper.store.inscricao;
 
 import java.util.Map;
 
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-public class CandidaturaResource implements CandidaturaController {
+public class InscricaoResource implements InscricaoController {
 
     @Autowired
-    private CandidaturaService candidaturaService;
+    private InscricaoService inscricaoService;
 
-    @GetMapping("/candidaturas/info")
+    @GetMapping("/inscricoes/info")
     public ResponseEntity<Map<String, String>> info() {
         return new ResponseEntity<Map<String, String>>(
             Map.ofEntries(
-                Map.entry("microservice.name", CandidaturaApplication.class.getSimpleName()),
+                Map.entry("microservice.name", InscricaoApplication.class.getSimpleName()),
                 Map.entry("os.arch", System.getProperty("os.arch")),
                 Map.entry("os.name", System.getProperty("os.name")),
                 Map.entry("os.version", System.getProperty("os.version")),
@@ -35,7 +35,7 @@ public class CandidaturaResource implements CandidaturaController {
                 Map.entry("user.home", System.getProperty("user.home")),
                 Map.entry("user.name", System.getProperty("user.name")),
                 Map.entry("jar", new java.io.File(
-                    CandidaturaApplication.class.getProtectionDomain()
+                    InscricaoApplication.class.getProtectionDomain()
                         .getCodeSource()
                         .getLocation()
                         .getPath()
@@ -45,43 +45,42 @@ public class CandidaturaResource implements CandidaturaController {
     }
 
     @Override
-    public ResponseEntity<CandidaturaOut> create(CandidaturaIn in) {
+    public ResponseEntity<InscricaoOut> create(InscricaoIn in) {
         // parser
-        Candidatura candidatura = CandidaturaParser.to(in);
+        Inscricao inscricao = InscricaoParser.to(in);
         // insert using service
-        candidatura = candidaturaService.create(candidatura);
+        inscricao = inscricaoService.create(inscricao);
         // return
         return ResponseEntity.created(
             ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(candidatura.id())
+                .buildAndExpand(inscricao.id())
                 .toUri())
-            .body(CandidaturaParser.to(candidatura));
+            .body(InscricaoParser.to(inscricao));
     }
 
     @Override
-    public ResponseEntity<CandidaturaOut> update(String id, CandidaturaIn in) {
+    public ResponseEntity<InscricaoOut> update(String id, InscricaoIn in) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     // @Override
-    // public ResponseEntity<CandidaturaOut> login(LoginIn in) {
-    //     Candidatura candidatura = candidaturaService.login(in.email(), in.password());
-    //     if (candidatura == null) {
+    // public ResponseEntity<InscricaoOut> login(LoginIn in) {
+    //     Inscricao inscricao = inscricaoService.login(in.email(), in.password());
+    //     if (inscricao == null) {
     //         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     //     }
-    //     return ResponseEntity.ok(CandidaturaParser.to(candidatura));
+    //     return ResponseEntity.ok(InscricaoParser.to(inscricao));
     // }
 
     @Override
-    public ResponseEntity<CandidaturaOut> read(String idUser, String roleUser) {
-        final CandidaturaOut candidatura = CandidaturaOut.builder()
-            .id(idUser)
-            .name(roleUser)
+    public ResponseEntity<InscricaoOut> read(String idInscricao) {
+        final InscricaoOut inscricao = InscricaoOut.builder()
+            .id(idInscricao)
             .build();
-        return ResponseEntity.ok(candidatura);
+        return ResponseEntity.ok(inscricao);
     }
     
 }

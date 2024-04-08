@@ -1,8 +1,8 @@
-CREATE TABLE account
+CREATE TABLE inscricao
 (
-    id_account character varying(36) NOT NULL,
-    tx_name character varying(256) NOT NULL,
-    tx_email character varying(256) NOT NULL,
-    tx_hash character varying(256) NOT NULL,
-    CONSTRAINT account_pkey PRIMARY KEY (id_account)
+    id_inscricao character varying(36) NOT NULL,
+    tx_id_user character varying(36) NOT NULL,
+    tx_id_job character varying(36) NOT NULL,
+    tx_status character varying(36) NOT NULL,
+    CONSTRAINT inscricao_pkey PRIMARY KEY (id_inscricao)
 );

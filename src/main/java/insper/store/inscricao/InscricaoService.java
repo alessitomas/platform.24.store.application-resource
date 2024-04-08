@@ -1,4 +1,4 @@
-package insper.store.candidatura;
+package insper.store.inscricao;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -11,22 +11,22 @@ import org.springframework.stereotype.Service;
 import lombok.NonNull;
 
 @Service
-public class CandidaturaService {
+public class InscricaoService {
 
     @Autowired
-    private CandidaturaRepository candidaturaRepository;
+    private InscricaoRepository inscricaoRepository;
 
-    public Candidatura create(Candidatura in) {
+    public Inscricao create(Inscricao in) {
         // in.hash(calculateHash(in.password()));
-        in.password(null);
-        return candidaturaRepository.save(new CandidaturaModel(in)).to();
+        // in.password(null);
+        return inscricaoRepository.save(new InscricaoModel(in)).to();
     }
 
-    public Candidatura read(@NonNull String id) {
-        return candidaturaRepository.findById(id).map(CandidaturaModel::to).orElse(null);
+    public Inscricao read(@NonNull String id) {
+        return inscricaoRepository.findById(id).map(InscricaoModel::to).orElse(null);
     }
 
-    // public Candidatura login(String email, String password) {
+    // public Inscricao login(String email, String password) {
     //     String hash = calculateHash(password);
     //     return accountRepository.findByEmailAndHash(email, hash).map(AccountModel::to).orElse(null);
     // }
