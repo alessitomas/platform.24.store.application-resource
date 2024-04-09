@@ -9,13 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+@Tag(name = "Inscricao", description = "Inscricao API")
 public class InscricaoResource implements InscricaoController {
 
     @Autowired
     private InscricaoService inscricaoService;
 
     @GetMapping("/inscricoes/info")
+    @Tag(name = "Info", description = "Inscricao API Info")
     public ResponseEntity<Map<String, String>> info() {
         return new ResponseEntity<Map<String, String>>(
             Map.ofEntries(
@@ -46,11 +51,14 @@ public class InscricaoResource implements InscricaoController {
 
 
     @GetMapping("/inscricoes/hello")
+
+    @Operation(summary = "Hello", description = "Hello")
     public String hello() {
         return "Hello from inscrit!";
     }
 
     @Override
+    @Operation(summary = "Create Inscricao", description = "Create Inscricao")
     public ResponseEntity<InscricaoOut> create(InscricaoIn in) {
         // parser
         Inscricao inscricao = InscricaoParser.to(in);
@@ -67,6 +75,7 @@ public class InscricaoResource implements InscricaoController {
     }
 
     @Override
+    @Operation(summary = "Update", description = "Update Inscricao")
     public ResponseEntity<InscricaoOut> update(String id, InscricaoIn in) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
@@ -82,6 +91,7 @@ public class InscricaoResource implements InscricaoController {
     // }
 
     @Override
+    @Operation(summary = "Read", description = "Read Inscricao")
     public ResponseEntity<InscricaoOut> read(String idInscricao) {
         final InscricaoOut inscricao = InscricaoOut.builder()
             .id(idInscricao)
