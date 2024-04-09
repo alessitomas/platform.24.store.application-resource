@@ -1,13 +1,13 @@
 package insper.store.inscricao;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import insper.store.account.AccountController;
+import insper.store.account.AccountOut;
+import insper.store.job.JobController;
+import insper.store.job.JobOut;
 import lombok.NonNull;
 
 @Service
@@ -16,9 +16,31 @@ public class InscricaoService {
     @Autowired
     private InscricaoRepository inscricaoRepository;
 
+    
+    @Autowired
+    private JobController jobController;
+    
+    @Autowired
+    private AccountController accountController;
+    
+    
+    
     public Inscricao create(Inscricao in) {
-        // in.hash(calculateHash(in.password()));
-        // in.password(null);
+
+        ResponseEntity<JobOut> response = jobController.read(in.id_job());
+
+        if (response.getStatusCode().isError()) throw new IllegalArgumentException("Invalid job");
+
+        ResponseEntity<AccountOut> response2 = accountController.read(in.id_user());
+
+        if (response2.getStatusCode().isError()) throw new IllegalArgumentException("Invalid user");
+        
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println(response2.getBody());
+        System.out.println(response.getBody());
+        System.out.println("------------------------------------------------------------------------------------");
+
+        
         return inscricaoRepository.save(new InscricaoModel(in)).to();
         
     }
