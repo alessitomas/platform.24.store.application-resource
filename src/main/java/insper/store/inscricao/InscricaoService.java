@@ -1,6 +1,8 @@
 package insper.store.inscricao;
 
+import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,7 @@ public class InscricaoService {
         
     }
 
+    @Cacheable(value = "inscricao", key = "#id", unless = "#result == null")
     public Inscricao read(@NonNull String id) {
         return inscricaoRepository.findById(id).map(InscricaoModel::to).orElse(null);
     }
