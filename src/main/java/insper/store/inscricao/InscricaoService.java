@@ -36,18 +36,13 @@ public class InscricaoService {
         ResponseEntity<AccountOut> response2 = accountController.read(in.id_user());
 
         if (response2.getStatusCode().isError()) throw new IllegalArgumentException("Invalid user");
-        
-        System.out.println("------------------------------------------------------------------------------------");
-        System.out.println(response2.getBody());
-        System.out.println(response.getBody());
-        System.out.println("------------------------------------------------------------------------------------");
 
         
         return inscricaoRepository.save(new InscricaoModel(in)).to();
         
     }
 
-    @Cacheable(value = "inscricao")
+    @Cacheable(value = "inscricao", key = "#id")
     public Inscricao read(@NonNull String id) {
         return inscricaoRepository.findById(id).map(InscricaoModel::to).orElse(null);
     }
