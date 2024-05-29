@@ -13,7 +13,9 @@ spring:
     properties:
       hibernate:
         default_schema: inscricao
-
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
 management:
   endpoints:
     web:

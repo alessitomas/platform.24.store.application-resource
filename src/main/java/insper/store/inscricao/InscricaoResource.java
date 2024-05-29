@@ -2,7 +2,9 @@ package insper.store.inscricao;
 
 import java.util.Map;
 
+import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,12 +55,7 @@ public class InscricaoResource implements InscricaoController {
                 HttpStatus.OK);
     }
 
-    @GetMapping("/inscricoes/hello")
 
-    @Operation(summary = "Hello", description = "Hello")
-    public String hello() {
-        return "Hello from inscrit!";
-    }
 
     @Override
     @Operation(summary = "Create Inscricao", description = "Create Inscricao")
@@ -94,6 +91,8 @@ public class InscricaoResource implements InscricaoController {
     // }
 
     @Override
+    // cache
+    @Cacheable(key = "#id", value = "inscricao")
     @Operation(summary = "Read", description = "Read Inscricao")
     public ResponseEntity<InscricaoOut> read(String idInscricao) {
         Inscricao inscricao = inscricaoService.read(idInscricao);
